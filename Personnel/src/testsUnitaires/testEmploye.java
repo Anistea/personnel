@@ -30,8 +30,13 @@ class TestEmploye {
 	
 	@Test
 	void testEstRoot() {
+		Ligue ligue = new Ligue("Tiralarc");
 		Employe root = GestionPersonnel.getGestionPersonnel().getRoot();
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),LocalDate.now());
 		assertTrue(root.estRoot());
+		assertFalse(employe.estRoot());
+		
+		
 	}
 	
 	@Test
@@ -95,7 +100,7 @@ class TestEmploye {
 		Ligue ligue = new Ligue("Tiralarc");
 		Employe employe1 = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),LocalDate.now());
 		Employe employe2 = GestionPersonnel.getGestionPersonnel().getRoot();
-		employe1.estAdmin(ligue);
+		ligue.setAdministrateur(employe1);
 		employe1.remove();
 		assertFalse(ligue.getEmployes().contains(employe1));
 		assertNull(employe1.getLigue());
@@ -122,7 +127,7 @@ class TestEmploye {
 		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),LocalDate.now());
 		LocalDate date = LocalDate.of(2010, 01, 01);
 		employe.setDateFin(date);
-		assertTrue(employe.getDateFin()==date);
+		assertEquals(employe.getDateFin(), date);
 	}
 	
 	@Test
@@ -131,6 +136,6 @@ class TestEmploye {
 		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),LocalDate.now());
 		LocalDate date = LocalDate.of(2020, 02, 02);
 		employe.setDateDebut(date);
-		assertTrue(employe.getDateDebut()==date);
+		assertEquals(employe.getDateDebut(), date);
 	}
 }

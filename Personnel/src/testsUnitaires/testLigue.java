@@ -46,7 +46,7 @@ class testLigue
 		Ligue autre = new Ligue("Fléchettes");
 		assertEquals(ligue.compareTo(autre), ligue.getNom().compareTo(autre.getNom()));
 		assertTrue(ligue.compareTo(autre) > 0);
-		assertTrue(ligue.compareTo(ligue) == 0);
+		assertEquals(ligue.compareTo(ligue), 0);
 		assertTrue(autre.compareTo(ligue) < 0);
 
 		
@@ -58,7 +58,7 @@ class testLigue
 		String ligue2 = "Fléchettes";
 		Ligue laligue = new Ligue(ligue);
 		laligue.setNom(ligue2);
-		assertTrue(laligue.getNom() == ligue2);
+		assertEquals(laligue.getNom(), ligue2);
 		assertTrue(laligue.getNom() != ligue);
 	}
 	
