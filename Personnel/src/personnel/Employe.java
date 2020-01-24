@@ -1,13 +1,14 @@
 package personnel;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
- * EmployÃ© d'une ligue hÃ©bergÃ©e par la M2L. Certains peuvent 
- * Ãªtre administrateurs des employÃ©s de leur ligue.
- * Un seul employÃ©, rattachÃ© Ã  aucune ligue, est le root.
- * Il est impossible d'instancier directement un employÃ©, 
- * il faut passer la mÃ©thode {@link Ligue#addEmploye addEmploye}.
+ * Employé d'une ligue hébergée par la M2L. Certains peuvent 
+ * être administrateurs des employés de leur ligue.
+ * Un seul employé, rattaché à aucune ligue, est le root.
+ * Il est impossible d'instancier directement un employé, 
+ * il faut passer la méthode {@link Ligue#addEmploye addEmploye}.
  */
 
 public class Employe implements Serializable, Comparable<Employe>
@@ -15,22 +16,26 @@ public class Employe implements Serializable, Comparable<Employe>
 	private static final long serialVersionUID = 4795721718037994734L;
 	private String nom, prenom, password, mail;
 	private Ligue ligue;
+	private LocalDate dateFin;
+	private LocalDate dateDebut; 
+	Employe(Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateFin, LocalDate dateDebut)
 	
-	Employe(Ligue ligue, String nom, String prenom, String mail, String password)
 	{
 		this.nom = nom;
 		this.prenom = prenom;
-		this.password = password;
 		this.mail = mail;
+		this.password = password;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
 		this.ligue = ligue;
 	}
 	
 	/**
-	 * Retourne vrai ssi l'employÃ© est administrateur de la ligue 
-	 * passÃ©e en paramÃ¨tre.
-	 * @return vrai ssi l'employÃ© est administrateur de la ligue 
-	 * passÃ©e en paramÃ¨tre.
-	 * @param ligue la ligue pour laquelle on souhaite vÃ©rifier si this 
+	 * Retourne vrai ssi l'employé est administrateur de la ligue 
+	 * passée en paramètre.
+	 * @return vrai ssi l'employé est administrateur de la ligue 
+	 * passée en paramÃ¨tre.
+	 * @param ligue la ligue pour laquelle on souhaite vérifier si this 
 	 * est l'admininstrateur.
 	 */
 	
@@ -40,8 +45,8 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 	
 	/**
-	 * Retourne vrai ssi l'employÃ© est le root.
-	 * @return vrai ssi l'employÃ© est le root.
+	 * Retourne vrai ssi l'employé est le root.
+	 * @return vrai ssi l'employé est le root.
 	 */
 	
 	public boolean estRoot()
@@ -50,8 +55,51 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 	
 	/**
-	 * Retourne le nom de l'employÃ©.
-	 * @return le nom de l'employÃ©. 
+	 * Retourne la date de cloture des inscriptions.
+	 * @return
+	 */
+	
+	public LocalDate getDateFin()
+	{
+		return dateFin;
+	}
+	
+	public void setDateFin(LocalDate dateFin)
+	{
+		// TODO vÃ©rifier que l'on avance pas la date.
+		
+		if (this.dateFin.isBefore(dateFin) || dateFin.equals(this.dateFin)) 
+			this.dateFin = dateFin;
+	else
+			throw new RuntimeException("Date de Fin invalide !");
+	
+	}
+	
+	
+	/***************************************************************************
+	 * Retourne la date de debut des inscriptions.
+	 * @return
+	 */
+	
+	public LocalDate getDateDebut()
+	{
+		return dateDebut;
+	}
+	
+	public void setDateDebut(LocalDate dateDebut)
+	{
+		// TODO vÃ©rifier que l'on avance pas la date.
+		
+		if (this.dateDebut.isBefore(dateDebut) || dateDebut.equals(this.dateDebut)) 
+			this.dateDebut = dateDebut;
+	else
+			throw new RuntimeException("Date de Début invalide !");
+	
+	}
+	
+	/**
+	 * Retourne le nom de l'employé.
+	 * @return le nom de l'employé. 
 	 */
 	
 	public String getNom()
@@ -60,7 +108,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 
 	/**
-	 * Change le nom de l'employÃ©.
+	 * Change le nom de l'employé.
 	 * @param nom le nouveau nom.
 	 */
 	
@@ -70,8 +118,8 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 
 	/**
-	 * Retourne le prÃ©nom de l'employÃ©.
-	 * @return le prÃ©nom de l'employÃ©.
+	 * Retourne le prénom de l'employé.
+	 * @return le prénom de l'employé.
 	 */
 	
 	public String getPrenom()
@@ -80,8 +128,8 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 	
 	/**
-	 * Change le prÃ©nom de l'employÃ©.
-	 * @param prenom le nouveau prÃ©nom de l'employÃ©. 
+	 * Change le prénom de l'employé.
+	 * @param prenom le nouveau prénom de l'employé. 
 	 */
 
 	public void setPrenom(String prenom)
@@ -90,8 +138,8 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 
 	/**
-	 * Retourne le mail de l'employÃ©.
-	 * @return le mail de l'employÃ©.
+	 * Retourne le mail de l'employé.
+	 * @return le mail de l'employé.
 	 */
 	
 	public String getMail()
@@ -100,8 +148,8 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 	
 	/**
-	 * Change le mail de l'employÃ©.
-	 * @param mail le nouveau mail de l'employÃ©.
+	 * Change le mail de l'employé.
+	 * @param mail le nouveau mail de l'employé.
 	 */
 
 	public void setMail(String mail)
@@ -110,11 +158,11 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 
 	/**
-	 * Retourne vrai ssi le password passÃ© en paramÃ¨tre est bien celui
-	 * de l'employÃ©.
-	 * @return vrai ssi le password passÃ© en paramÃ¨tre est bien celui
-	 * de l'employÃ©.
-	 * @param password le password auquel comparer celui de l'employÃ©.
+	 * Retourne vrai ssi le password passé en paramètre est bien celui
+	 * de l'employé.
+	 * @return vrai ssi le password passé en paramètre est bien celui
+	 * de l'employé.
+	 * @param password le password auquel comparer celui de l'employé.
 	 */
 	
 	public boolean checkPassword(String password)
@@ -123,8 +171,8 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 
 	/**
-	 * Change le password de l'employÃ©.
-	 * @param password le nouveau password de l'employÃ©. 
+	 * Change le password de l'employé.
+	 * @param password le nouveau password de l'employé. 
 	 */
 	
 	public void setPassword(String password)
@@ -133,8 +181,8 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 
 	/**
-	 * Retourne la ligue Ã  laquelle l'employÃ© est affectÃ©.
-	 * @return la ligue Ã  laquelle l'employÃ© est affectÃ©.
+	 * Retourne la ligue Ã  laquelle l'employé est affecté.
+	 * @return la ligue Ã  laquelle l'employé est affecté.
 	 */
 	
 	public Ligue getLigue()
@@ -143,8 +191,8 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 
 	/**
-	 * Supprime l'employÃ©. Si celui-ci est un administrateur, le root
-	 * rÃ©cupÃ¨re les droits d'administration sur sa ligue.
+	 * Supprime l'employé. Si celui-ci est un administrateur, le root
+	 * récupére les droits d'administration sur sa ligue.
 	 */
 	
 	public void remove()
