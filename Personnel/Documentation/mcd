@@ -1,0 +1,3 @@
+EMPLOYE: IdEmploye, lvl, nom, prenom, mail, password, dateFin, dateDebut
+APPARTENIR, 0N LIGUE, 01 EMPLOYE:
+LIGUE: IdLigue, nomLigue
