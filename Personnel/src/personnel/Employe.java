@@ -18,7 +18,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	private Ligue ligue;
 	private LocalDate dateFin;
 	private LocalDate dateDebut; 
-	Employe(Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateFin, LocalDate dateDebut)
+	Employe(Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateDebut)
 	
 	{
 		this.nom = nom;
@@ -26,7 +26,6 @@ public class Employe implements Serializable, Comparable<Employe>
 		this.mail = mail;
 		this.password = password;
 		this.dateDebut = dateDebut;
-		this.dateFin = dateFin;
 		this.ligue = ligue;
 	}
 	
@@ -45,8 +44,8 @@ public class Employe implements Serializable, Comparable<Employe>
 	}
 	
 	/**
-	 * Retourne vrai ssi l'employé est le root.
-	 * @return vrai ssi l'employé est le root.
+	 * Retourne vrai si l'employé est le root.
+	 * @return vrai si l'employé est le root.
 	 */
 	
 	public boolean estRoot()
@@ -66,13 +65,13 @@ public class Employe implements Serializable, Comparable<Employe>
 	
 	public void setDateFin(LocalDate dateFin)
 	{
-		// TODO vÃ©rifier que l'on avance pas la date.
+		// TODO vÃ©rifier que la dateFin n'est pas avant la dateDebut.
 		
-		if (this.dateFin.isBefore(dateFin) || dateFin.equals(this.dateFin)) 
+		if (this.dateFin.isAfter(dateDebut))
 			this.dateFin = dateFin;
-	else
-			throw new RuntimeException("Date de Fin invalide !");
-	
+		
+	else 
+		    throw new RuntimeException("Date de Fin invalide !");  
 	}
 	
 	
@@ -88,9 +87,9 @@ public class Employe implements Serializable, Comparable<Employe>
 	
 	public void setDateDebut(LocalDate dateDebut)
 	{
-		// TODO vÃ©rifier que l'on avance pas la date.
+		// TODO vÃ©rifier que la dateDebut n'est pas après la dateFin.
 		
-		if (this.dateDebut.isBefore(dateDebut) || dateDebut.equals(this.dateDebut)) 
+		if (this.dateDebut.isBefore(dateFin)) 
 			this.dateDebut = dateDebut;
 	else
 			throw new RuntimeException("Date de Début invalide !");
