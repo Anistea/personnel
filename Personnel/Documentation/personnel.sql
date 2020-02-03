@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 03 fév. 2020 à 14:03
+-- Généré le :  lun. 03 fév. 2020 à 16:47
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -21,18 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `personnel`
 --
-
--- --------------------------------------------------------
-
---
--- Structure de la table `appartenir`
---
-
-DROP TABLE IF EXISTS `appartenir`;
-CREATE TABLE IF NOT EXISTS `appartenir` (
-  `idEmploye` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`idEmploye`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 

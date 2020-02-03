@@ -100,6 +100,14 @@ public class LigueConsole
 		Menu menu = new Menu("Gérer les employés de " + ligue.getNom(), "e");
 		menu.add(afficherEmployes(ligue));
 		menu.add(ajouterEmploye(ligue));
+		menu.add(selectionnerEmploye(ligue));
+		menu.addBack("q");
+		return menu;
+	}
+	
+	private Menu selectionnerEmploye(Ligue ligue)
+	{
+		Menu menu = new Menu("Sélectionner les employés de " + ligue.getNom(), "e");
 		menu.add(modifierEmploye(ligue));
 		menu.add(supprimerEmploye(ligue));
 		menu.addBack("q");
@@ -125,6 +133,7 @@ public class LigueConsole
 				() -> new ArrayList<>(ligue.getEmployes()),
 				(index, element) -> {employeConsole.editerEmploye(element);}
 				);
+		
 	}
 	
 	private Option supprimer(Ligue ligue)
