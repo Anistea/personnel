@@ -1,6 +1,6 @@
 package commandLine;
 
-import static commandLineMenus.rendering.examples.util.InOut.getString;
+import static commandLineMenus.rendering.examples.util.InOut.*;
 
 import java.util.ArrayList;
 import java.time.LocalDate;
@@ -30,6 +30,16 @@ public class LigueConsole
 		menu.add(selectionnerLigue());
 		menu.addBack("q");
 		return menu;
+	}
+	
+	private LocalDate  getDate() {
+		int year,month,day;
+		year = getInt("  Annee (yyyy) : ");
+		month= getInt("  Mois (mm) : ");
+		day = getInt("  Jour (jj) : ");
+		
+		LocalDate date = LocalDate.of(year, month, day);
+		return date;
 	}
 
 	private Option afficherLigues()
@@ -85,12 +95,14 @@ public class LigueConsole
 	
 	private Option ajouterEmploye(final Ligue ligue)
 	{
+		
+
 		return new Option("ajouter un employé", "a",
 				() -> 
 				{
 					ligue.addEmploye(getString("nom : "), 
 						getString("prenom : "), getString("mail : "), 
-						getString("password : "), LocalDate.now());
+						getString("password : "), getDate());
 				}
 		);
 	}
@@ -140,5 +152,6 @@ public class LigueConsole
 	{
 		return new Option("Supprimer", "d", () -> {ligue.remove();});
 	}
+	
 	
 }
