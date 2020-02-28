@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 24 fév. 2020 à 16:31
+-- Généré le :  ven. 28 fév. 2020 à 10:35
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `employe` (
   `prenom` varchar(255) NOT NULL,
   `mail` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `dateFin` date NOT NULL,
+  `dateFin` date DEFAULT NULL,
   `dateDebut` date NOT NULL,
   PRIMARY KEY (`idEmploye`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
