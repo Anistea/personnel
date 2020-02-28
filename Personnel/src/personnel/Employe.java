@@ -67,11 +67,8 @@ public class Employe implements Serializable, Comparable<Employe>
 	{
 		// TODO v√©rifier que la dateFin n'est pas avant la dateDebut.
 		
-		if (this.dateFin.isAfter(dateDebut))
 			this.dateFin = dateFin;
 		
-	else 
-		    throw new RuntimeException("Date de Fin invalide !");  
 	}
 	
 	
@@ -89,11 +86,14 @@ public class Employe implements Serializable, Comparable<Employe>
 	{
 		// TODO v√©rifier que la dateDebut n'est pas aprËs la dateFin.
 		
-		if (this.dateDebut.isBefore(dateFin)) 
-			this.dateDebut = dateDebut;
-	else
+		if (this.dateDebut.isAfter(dateFin)) {
 			throw new RuntimeException("Date de DÈbut invalide !");
-	
+		}
+			
+	else {
+		   this.dateDebut = dateDebut;
+	}
+		
 	}
 	
 	/**
@@ -220,7 +220,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	@Override
 	public String toString()
 	{
-		String res = nom + " " + prenom + " " + mail + " " + dateDebut + " (" ;
+		String res = nom + " " + prenom + " " + mail + " " + "DEB: " + dateDebut + " FIN: " + dateFin + " (" ;
 		if (estRoot())
 			res += "super-utilisateur";
 		else

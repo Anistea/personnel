@@ -107,6 +107,17 @@ public class LigueConsole
 		);
 	}
 	
+	private Menu modifierEmploye(Employe employe)
+	{
+		Menu menu = new Menu("Editer " + employe.getNom() +" "+employe.getPrenom());
+		menu.add(employeConsole.editerEmploye(employe));
+		menu.add(dateFin(employe));
+		menu.add(supprimerEmploye(employe));
+		menu.addBack("q");
+		return menu;
+		
+	}
+	
 	private Menu gererEmployes(Ligue ligue)
 	{
 		Menu menu = new Menu("Gérer les employés de " + ligue.getNom(), "e");
@@ -117,21 +128,18 @@ public class LigueConsole
 		return menu;
 	}
 	
-	private Menu selectionnerEmploye(Ligue ligue)
+	private List<Employe> selectionnerEmploye(Ligue ligue)
 	{
-		Menu menu = new Menu("Sélectionner les employés de " + ligue.getNom(), "e");
-		menu.add(modifierEmploye(ligue));
-		menu.add(supprimerEmploye(ligue));
-		menu.addBack("q");
-		return menu;
+		return new List<>("Sélectionner un employé(e)","S", 
+				() -> new ArrayList<>(ligue.getEmployes()),
+				(element)-> modifierEmploye(element)
+				);
 	}
 
-	private List<Employe> supprimerEmploye(final Ligue ligue)
+	private Option supprimerEmploye(final Employe employe)
 	{
-		return new List<>("Supprimer un employé", "s", 
-				() -> new ArrayList<>(ligue.getEmployes()),
-				(index, element) -> {element.remove();}
-				);
+		return new Option("Supprimer " + employe.getNom() +" "+employe.getPrenom() ,"s", 
+				() -> {employe.remove();});
 	}
 	
 	private List<Employe> changerAdministrateur(final Ligue ligue)
@@ -139,18 +147,15 @@ public class LigueConsole
 		return null;
 	}		
 
-	private List<Employe> modifierEmploye(final Ligue ligue)
-	{
-		return new List<>("Modifier un employé", "e", 
-				() -> new ArrayList<>(ligue.getEmployes()),
-				(index, element) -> {employeConsole.editerEmploye(element);}
-				);
-		
-	}
 	
 	private Option supprimer(Ligue ligue)
 	{
 		return new Option("Supprimer", "d", () -> {ligue.remove();});
+	}
+	
+	private Option dateFin(Employe employe)
+	{
+		return new Option("Ajouter une date de fin", "dF", () -> {employe.setDateFin(getDate());});
 	}
 	
 	
