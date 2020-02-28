@@ -1,7 +1,9 @@
 package commandLine;
 
+import static commandLineMenus.rendering.examples.util.InOut.getInt;
 import static commandLineMenus.rendering.examples.util.InOut.getString;
 
+import java.time.LocalDate;
 
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
@@ -24,6 +26,8 @@ public class EmployeConsole
 		menu.add(changerPrenom(employe));
 		menu.add(changerMail(employe));
 		menu.add(changerPassword(employe));
+		menu.add(changerDateDebut(employe));
+		menu.add(changerDateFin(employe));
 		menu.addBack("q");
 		return menu;
 	}
@@ -50,5 +54,23 @@ public class EmployeConsole
 		return new Option("Changer le password", "x", () -> {employe.setPassword(getString("Nouveau password : "));});
 	}
 	
+	private Option changerDateDebut(final Employe employe)
+	{
+		return new Option("Changer la date de Debut", "D", () -> {employe.setDateDebut(getDate());});
+	}
+	
+	private Option changerDateFin(final Employe employe)
+	{
+		return new Option("Changer la date de Fin", "F", () -> {employe.setDateFin(getDate());});
+	}
+	private LocalDate  getDate() {
+		int year,month,day;
+		year = getInt("  Annee (yyyy) : ");
+		month= getInt("  Mois (mm) : ");
+		day = getInt("  Jour (jj) : ");
+		
+		LocalDate date = LocalDate.of(year, month, day);
+		return date;
+	}
 
 }
