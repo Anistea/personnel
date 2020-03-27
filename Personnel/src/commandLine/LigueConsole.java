@@ -72,7 +72,7 @@ public class LigueConsole
 		Menu menu = new Menu("Editer " + ligue.getNom());
 		menu.add(afficher(ligue));
 		menu.add(gererEmployes(ligue));
-		//menu.add(changerAdministrateur(ligue));
+		menu.add(changerAdministrateur(ligue));
 		menu.add(changerNom(ligue));
 		menu.add(supprimer(ligue));
 		menu.addBack("q");
@@ -144,10 +144,11 @@ public class LigueConsole
 	
 	private List<Employe> changerAdministrateur(final Ligue ligue)
 	{
-		return null;
-	}		
-
-	
+		return new List<>("Changer un Administrateur","C", 
+				() -> new ArrayList<>(ligue.getEmployes()),
+				(index,element)-> {ligue.setAdministrateur(element);}
+				);
+	}
 	private Option supprimer(Ligue ligue)
 	{
 		return new Option("Supprimer", "d", () -> {ligue.remove();});

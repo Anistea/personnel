@@ -21,8 +21,9 @@ public class ConnexionJM {
 	public static void main(String[] args) {
 		// TODO code application logic here
 		Connection cnx=connecterDB();
-	}
 	
+	}
+
 	public static Connection connecterDB() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
