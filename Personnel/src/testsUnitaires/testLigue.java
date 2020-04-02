@@ -4,46 +4,52 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import personnel.*;
 
 class testLigue 
 {
+	GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
+	
 	@Test
-	void createLigue() 
+	void createLigue() throws SauvegardeImpossible
 	{
-		Ligue ligue = new Ligue("Fléchettes");
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
 		assertEquals("Fléchettes", ligue.getNom());
 	}
 
 	@Test
-	void addEmploye() 
+	void addEmploye() throws SauvegardeImpossible
 	{
-		Ligue ligue = new Ligue("Fléchettes");
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
 		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.now()); 
 		assertEquals(employe, ligue.getEmployes().first());
 	}
 	
 	@Test
-	void testSetAdministrateur() {
-		Ligue ligue = new Ligue("Fléchettes");
+	void testSetAdministrateur() throws SauvegardeImpossible
+	{
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
 		Employe administrateur= ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.now()); 
 		ligue.setAdministrateur(administrateur);
 		assertEquals(administrateur, ligue.getAdministrateur());
 	}
 	
 	@Test
-	void getEmployes() {
-		Ligue ligue = new Ligue("Fléchettes");
+	void getEmployes() throws SauvegardeImpossible
+	{
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
 		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.now()); 
 		assertEquals(employe, ligue.getEmployes().first());
 	}
 	
 	@Test
-	void compareTo() {
-		Ligue ligue = new Ligue("Tiralarc");
-		Ligue autre = new Ligue("Fléchettes");
+	void compareTo() throws SauvegardeImpossible
+	{
+		Ligue ligue = gestionPersonnel.addLigue("Tiralarc");
+		Ligue autre = gestionPersonnel.addLigue("Fléchettes");
 		assertEquals(ligue.compareTo(autre), ligue.getNom().compareTo(autre.getNom()));
 		assertTrue(ligue.compareTo(autre) > 0);
 		assertEquals(ligue.compareTo(ligue), 0);
@@ -53,18 +59,20 @@ class testLigue
 	}
 	
 	@Test
-	void testSetNom() {
+	void testSetNom() throws SauvegardeImpossible
+	{
 		String ligue = "Tiralarc";
 		String ligue2 = "Fléchettes";
-		Ligue laligue = new Ligue(ligue);
+		Ligue laligue = gestionPersonnel.addLigue(ligue);
 		laligue.setNom(ligue2);
 		assertEquals(laligue.getNom(), ligue2);
 		assertTrue(laligue.getNom() != ligue);
 	}
 	
 	@Test
-	void remove() {
-		Ligue ligue = new Ligue("Fléchettes");
+	void remove() throws SauvegardeImpossible
+	{
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
 		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty", LocalDate.now()); 
 		ligue.remove();
 		System.out.println(ligue.getEmployes());

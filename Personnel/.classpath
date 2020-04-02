@@ -9,5 +9,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/CommandLine"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="LibrariesBDD/com.mysql.jdbc_5.1.5.jar"/>
+	<classpathentry kind="lib" path="LibrariesBDD/mysql-connector-java-8.0.19.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

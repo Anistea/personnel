@@ -18,9 +18,11 @@ public class Employe implements Serializable, Comparable<Employe>
 	private Ligue ligue;
 	private LocalDate dateFin;
 	private LocalDate dateDebut; 
-	Employe(Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateDebut)
+	private GestionPersonnel gestionPersonnel;
 	
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateDebut)
 	{
+		this.gestionPersonnel = gestionPersonnel;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.mail = mail;
@@ -29,6 +31,8 @@ public class Employe implements Serializable, Comparable<Employe>
 		this.ligue = ligue;
 	}
 	
+	
+
 	/**
 	 * Retourne vrai ssi l'employé est administrateur de la ligue 
 	 * passée en paramètre.
@@ -63,11 +67,17 @@ public class Employe implements Serializable, Comparable<Employe>
 		return dateFin;
 	}
 	
-	public void setDateFin(LocalDate dateFin)
+	public void setDateFin(LocalDate dateFin) 
 	{
 		// TODO vÃ©rifier que la dateFin n'est pas avant la dateDebut.
 		
-			this.dateFin = dateFin;
+		if (this.dateFin.isAfter(dateDebut)) {
+			throw new RuntimeException("Date de Fin invalide !");
+		}
+			
+	else {
+		   this.dateFin = dateFin;
+	}
 		
 	}
 	
@@ -86,7 +96,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	{
 		// TODO vÃ©rifier que la dateDebut n'est pas après la dateFin.
 		
-		if (this.dateDebut.isAfter(dateFin)) {
+		if (this.dateDebut.isBefore(dateFin)) {
 			throw new RuntimeException("Date de Début invalide !");
 		}
 			
