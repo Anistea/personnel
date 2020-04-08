@@ -75,6 +75,7 @@ public class LigueConsole
 				System.err.println("Impossible de sauvegarder cette ligue");
 			}
 		});
+	}
 	
 	private Menu editerLigue(Ligue ligue)
 	{
